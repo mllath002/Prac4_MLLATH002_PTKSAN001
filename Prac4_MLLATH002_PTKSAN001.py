@@ -128,7 +128,7 @@ while True:
     else:
         if(number <5):
             display[number] = (str(TIME)+"\t"+str(reset)+"\t"+str(Volt_Convert(voltage))+" V\t" +str(Temp_Convert(temperature))+ " C \t"+str(Light_Convert(light_val))+"%" )
-            count+= 1    
+            number = number + 1    
     
 GPIO.cleanup()
 
