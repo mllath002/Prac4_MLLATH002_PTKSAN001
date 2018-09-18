@@ -117,10 +117,17 @@ while True:
     temperature = vals[1] #read data from channel 1
     light_val = vals[6] #read data from channel 6
     
+    #convert values to display values
     light_up = Light_Convert(light_val)
     temp_t = Temp_Convert(temperature)
     pot_volt = Volt_Convert(voltage)
     
+    tim = time.strftime("%X") #formatting directive for time
+    currentTime = time.time()
+    timeDifference = round((currentTime - timer),1) #record time passed
+    timer = currentTime #reset reference time
+    reset = round((reset + timeDifference),2)
+   
 GPIO.cleanup()
 
 
