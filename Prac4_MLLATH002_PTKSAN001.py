@@ -45,7 +45,7 @@ display = [0]*5
 reset = 0 #reset button 
 number = 0
 
-# FUNCTION DEFINITION: CLEAR  
+# FUNCTION DEFINITION: clear and reset  
 def clear_callback(channel)
     # clear console and reset time
     empty = os.system('clear')
@@ -54,7 +54,7 @@ def clear_callback(channel)
     print("Time|t|tTimer|tPot|tTemp|tLight")
     
     
-# FUNCTION DEFINITION: CHANGE FREQUENCY 
+# FUNCTION DEFINITION: change frequency 
 def freq_callback(channel)
     global delay
     if (delay == 0.5): 
@@ -130,7 +130,7 @@ while True:
             display[number] = (str(TIME)+"\t"+str(reset)+"\t"+str(Volt_Convert(voltage))+" V\t" +str(Temp_Convert(temperature))+ " C \t"+str(Light_Convert(light_val))+"%" )
             number = number + 1    
     
-GPIO.cleanup()
+
 
 
 
