@@ -113,9 +113,13 @@ while True:
     for i in range(8):
         values[i]=mcp.read_adc(i) #read in data from adc
     time.sleep(delay)
-    vol = values[2] # read data from channel 2
-    val = values[1] #read data from channel 1
-    li = values[6] #read data from channel 6
+    voltage = vals[2] # read data from channel 2
+    temperature = vals[1] #read data from channel 1
+    light_val = vals[6] #read data from channel 6
+    
+    light_up = Light_Convert(light_val)
+    temp_t = Temp_Convert(temperature)
+    pot_volt = Volt_Convert(voltage)
     
 GPIO.cleanup()
 
