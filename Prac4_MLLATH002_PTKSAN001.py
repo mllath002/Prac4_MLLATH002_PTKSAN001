@@ -85,15 +85,50 @@ def disp_callback(channel):
     
 =======
 #FUNCTION DEFINITION: convert data to voltage
-def Volt_Convert(voltage) 
+def Volt_Convert(voltage): 
     voltage_read = (voltage*3.3)/1023
     voltage_read = round (voltage_read, 1) # round to 1 decimal place
     return voltage_read 
 
 
 #FUNCTION DEFINITION: convert data to temperature in celsius 
-def Temp_Convert(temp) 
+def Temp_Convert(temp): 
     voltage = (temp*3.3)/1023 
     temperature_read = (voltage-0.5)*100
     temperature_read = int (round (temp, 0)) 
     return temperature_read
+
+#FUNCTION DEFINITION: converting light data to percentage
+def Light_Convert(light_val):
+    light = (light_val/1023)*100
+    light = 100 - light
+    light = int(round(light)) #round off number and convert type to int
+    return light
+
+vals = [0] * 8
+print("Time|t|tTimer|tPot|tTemp|tLight")
+timer = time.time()
+
+while True:
+    for i in range(8):
+        values[i]=mcp.read_adc(i) #read in data from adc
+    time.sleep(delay)
+    voltage = vals[2] # read data from channel 2
+    temperature = vals[1] #read data from channel 1
+    light_val = vals[6] #read data from channel 6
+    
+    #convert values to display values
+    light_up = Light_Convert(light_val)
+    temp_t = Temp_Convert(temperature)
+    pot_volt = Volt_Convert(voltage)
+    
+    tim = time.strftime("%X") #formatting directive for time
+    currentTime = time.time()
+    timeDifference = round((currentTime - timer),1) #record time passed
+    timer = currentTime #reset reference time
+    reset = round((reset + timeDifference),2)
+   
+GPIO.cleanup()
+
+
+
