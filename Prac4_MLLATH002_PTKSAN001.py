@@ -117,9 +117,18 @@ while True:
     temperature = vals[1] #read data from channel 1
     light_val = vals[6] #read data from channel 6
     
-    light_up = Light_Convert(light_val)
-    temp_t = Temp_Convert(temperature)
-    pot_volt = Volt_Convert(voltage)
+    currentTime = time.time()
+    TIME = time.strftime("%X")
+    timeDifference = round((currentTime - timer),1)
+    timer = currentTime
+    reset = roundf((reset + timeDifference),2)
+    
+    if (stop == False):
+        print(str(TIME)+"\t"+str(reset)+"\t"+str(Volt_Convert(voltage))+" V\t" +str(Temp_Convert(temperature))+ " C \t"+str(Light_Convert(light_val))+"%" )
+    else:
+        if(number <5):
+            display[number] = (str(TIME)+"\t"+str(reset)+"\t"+str(Volt_Convert(voltage))+" V\t" +str(Temp_Convert(temperature))+ " C \t"+str(Light_Convert(light_val))+"%" )
+            number = number + 1    
     
 GPIO.cleanup()
 
