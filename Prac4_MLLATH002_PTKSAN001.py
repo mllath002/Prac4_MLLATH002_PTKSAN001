@@ -32,6 +32,12 @@ GPIO.setup(SPICLK, GPIO.OUT)
 
 mcp = Adafruit_MCP3008.MCP3008(clk = SPICLK, cs =SPICS, mosi = SPIMOSI, miso = SPIMISO)
 
+#interrupts
+GPIO.add_event_detect(freq_btn,GPIO.FALLING, callback=freq_callback,bouncetime=200)
+GPIO.add_event_detect(reset_btn,GPIO.FALLING, callback=clear_callback,bouncetime=200)
+GPIO.add_event_detect(stop_btn,GPIO.FALLING, callback=stop_callback,bouncetime=200)
+GPIO.add_event_detect(display_btn,GPIO.FALLING, callback=disp_callback,bouncetime=200)
+
 # variables 
 delay = 0.5 #frequency delay 
 stop = False #stop button 
@@ -45,6 +51,8 @@ def clear_callback(channel)
     empty = os.system('clear')
     global reset
     reset = 0 
+    print("Time|t|tTimer|tPot|tTemp|tLight")
+    
     
 # FUNCTION DEFINITION: CHANGE FREQUENCY 
 def freq_callback(channel)
@@ -55,5 +63,25 @@ def freq_callback(channel)
         delay = 2 
     else: 
         delay = 0.5
+
+# FUNCTION DEEFINITION: Stop 
+def stop_callback(channel):
+    global stop
+    global count
+    if(stop==False):
+        count =0
+        stop = True
         
+    else:
+        stop = False
+        
+ # FUNCTION DEFINITION: Display
+def disp_callback(channel):
+    global display
+    print("------------------------------------------------")
+    print("Time|t|tTimer|tPot|tTemp|tLight")
+    for i in range(5):
+        print(display[i])
+    print("------------------------------------------------")
+    
 
