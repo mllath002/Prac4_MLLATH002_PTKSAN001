@@ -132,5 +132,5 @@ while True:
     
 
 
-
+GPIO.cleanup()
 
