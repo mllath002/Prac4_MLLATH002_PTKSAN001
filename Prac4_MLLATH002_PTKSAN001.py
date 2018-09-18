@@ -32,5 +32,28 @@ GPIO.setup(SPICLK, GPIO.OUT)
 
 mcp = Adafruit_MCP3008.MCP3008(clk = SPICLK, cs =SPICS, mosi = SPIMOSI, miso = SPIMISO)
 
+# variables 
+delay = 0.5 #frequency delay 
+stop = False #stop button 
+display = [0]*5
+reset = 0 #reset button 
+number = 0
 
+# FUNCTION DEFINITION: CLEAR  
+def clear_callback(channel)
+    # clear console and reset time
+    empty = os.system('clear')
+    global reset
+    reset = 0 
+    
+# FUNCTION DEFINITION: CHANGE FREQUENCY 
+def freq_callback(channel)
+    global delay
+    if (delay == 0.5): 
+        delay = 1
+    elif (delay == 1):
+        delay = 2 
+    else: 
+        delay = 0.5
+        
 
