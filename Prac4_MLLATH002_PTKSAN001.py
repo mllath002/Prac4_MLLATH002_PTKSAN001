@@ -121,7 +121,7 @@ while True:
     temp_t = Temp_Convert(temperature)
     pot_volt = Volt_Convert(voltage)
     
-GPIO.cleanup()
+
 
 
 
