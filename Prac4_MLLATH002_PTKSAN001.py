@@ -71,7 +71,6 @@ def stop_callback(channel):
     if(stop==False):
         count =0
         stop = True
-        
     else:
         stop = False
         
@@ -84,4 +83,17 @@ def disp_callback(channel):
         print(display[i])
     print("------------------------------------------------")
     
+=======
+#FUNCTION DEFINITION: convert data to voltage
+def Volt_Convert(voltage) 
+    voltage_read = (voltage*3.3)/1023
+    voltage_read = round (voltage_read, 1) # round to 1 decimal place
+    return voltage_read 
 
+
+#FUNCTION DEFINITION: convert data to temperature in celsius 
+def Temp_Convert(temp) 
+    voltage = (temp*3.3)/1023 
+    temperature_read = (voltage-0.5)*100
+    temperature_read = int (round (temp, 0)) 
+    return temperature_read
